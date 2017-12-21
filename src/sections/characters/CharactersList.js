@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { FlatList, View, StyleSheet, Text } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { Colors } from 'maheroes/src/commons'
+
+import CharacterCell from './CharacterCell'
 
 /************************ REDUX ************************/
 import { connect } from 'react-redux'
@@ -13,11 +16,16 @@ class CharactersList extends Component {
         this.props.fetchCharactersList()
     }
 
+    onSelect(character) {
+        this.props.updateCharacterSelected(character)
+    }
+
     renderItem(item, index) {
-        return(
-            <View>
-                <Text>CharactersList</Text>
-            </View>
+        return (
+            <CharacterCell 
+                item={ item } 
+                onSelect={ (character) => { this.onSelect(character) } }
+            />
         )
     }
 
@@ -60,6 +68,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(CharactersList)
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: Colors.background
     }
 })
