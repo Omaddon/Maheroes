@@ -30,9 +30,9 @@ class CharactersList extends Component {
     }
 
     renderHeader() {
+        console.log(this.props.isFetching)
         return (
             <View>
-                { console.log('renderHeader: ', this.props.isFetching) }
                 { this.props.isFetching ? 
                     <ActivityIndicator 
                         size='large' 
