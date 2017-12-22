@@ -45,16 +45,16 @@ class CharacterDetail extends Component {
                 <View style={ styles.buttonContainer }>
                     { wiki ?
                         <Button
-                            label='Wiki'
-                            containerStyle={ styles.button }
-                            onPress= { () => { this.goToUrl(wiki) } }
+                            label           = 'Wiki'
+                            containerStyle  = { styles.button }
+                            onPress         = { () => { this.goToUrl(wiki) } }
                         />
                     : null }
                     { detail ?
                         <Button
-                            label='Detail'
-                            containerStyle={ styles.button }
-                            onPress= { () => { this.goToUrl(detail) } }
+                            label           = 'Detail'
+                            containerStyle  = { styles.button }
+                            onPress         = { () => { this.goToUrl(detail) } }
                         />
                     : null }
                 </View>

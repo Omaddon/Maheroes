@@ -16,7 +16,10 @@ export default class CharacterCell extends Component {
         
         return (
             <TouchableOpacity onPress={ () => onSelect(item) }>
-                <Image source={ HeroeInfo.getHeroeImage(item) } resizeMode={ 'cover' } style={ styles.image }/>
+                <Image 
+                    source      = { HeroeInfo.getHeroeImage(item) } 
+                    resizeMode  = { 'cover' } 
+                    style       = { styles.image }/>
                 <View style={ styles.textContainer }>
                     <Text style={ styles.name }>{ name }</Text>
                 </View>

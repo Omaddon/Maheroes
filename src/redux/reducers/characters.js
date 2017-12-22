@@ -23,6 +23,11 @@ export default function reducer(state = initialState, action = {}) {
                 ...state,
                 selected: action.character
             }
+        case types.CHARACTER_POST_NEWCHAR:
+            return {
+                ...state,
+                list: [...state.list, action.newHeroe]
+            }
         default:
             return state
     }

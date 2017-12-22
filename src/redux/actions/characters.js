@@ -48,3 +48,30 @@ export function updateCharacterSelected(character) {
     }
 }
 
+export function postHeroe(newHeroe) {
+    return {
+        type: types.CHARACTER_POST_NEWCHAR,
+        newHeroe
+    }
+
+    /*
+    return (dispatch, getState) => {
+        dispatch(setCharactersFetching(true))
+
+        const fetchUrl = ''
+        post(fetchUrl, newheroe)
+            .then( (response) => {
+                dispatch(setCharactersFetching(false))
+                if (response) {
+                    dispatch(fetchCharactersList())
+                    dispatch(updateCharacterSelected(null))
+                }
+            })
+            .catch( (error) => {
+                console.log("axios delete error: ", error)
+                dispatch(setCharactersFetching(false))
+            })
+    
+    }
+    */
+}

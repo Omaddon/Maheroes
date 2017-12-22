@@ -5,8 +5,8 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
-import { Scene, Router } from 'react-native-router-flux'
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from 'react-native'
+import { Scene, Router, Actions } from 'react-native-router-flux'
 
 import * as webservices from 'maheroes/src/webservices/webservices'
 import { Colors } from 'maheroes/src/commons'
@@ -14,6 +14,8 @@ import { Colors } from 'maheroes/src/commons'
 /********************* COMPONENTS **********************/
 import CharactersList from 'maheroes/src/sections/characters/CharactersList'
 import CharacterDetail from 'maheroes/src/sections/characters/CharacterDetail'
+import CharacterNew from 'maheroes/src/sections/characters/CharacterNew'
+import CharacterOptions from 'maheroes/src/sections/characters/CharacterOptions'
 /*******************************************************/
 
 /************************ REDUX ************************/
@@ -36,6 +38,30 @@ export default class App extends Component {
     StatusBar.setBarStyle('light-content')
   }
 
+  addHeroeButton() {
+    return (
+      <TouchableOpacity 
+        onPress = { () => Actions.CharacterNew({ title: 'New Heroe' }) } 
+        style   = { styles.addButton }>
+
+        <Text style={ styles.addButtonText }>{ '+' }</Text>
+
+      </TouchableOpacity>
+    )
+  }
+
+  optionsButton() {
+    return (
+      <TouchableOpacity 
+        onPress = { () => Actions.CharacterOptions({ title: 'Options' }) } 
+        style   = { styles.optionsButton }>
+
+        <Text style={ styles.optionsButtonText }>{ 'Options' }</Text>
+
+    </TouchableOpacity>
+    )
+  }
+
   render() {
 
     console.disableYellowBox = true
@@ -45,18 +71,32 @@ export default class App extends Component {
         <Router>
           <Scene key='root'>
             <Scene
-              key='CharacterList'
-              component={ CharactersList }
-              navigationBarStyle={ styles.navBar }
-              navBarButtonColor={ 'white' }
-              title={ 'Marvel Heroes' }
-              backTitle= { null }
+              key                 = 'CharacterList'
+              component           = { CharactersList }
+              navigationBarStyle  = { styles.navBar }
+              navBarButtonColor   = { 'white' }
+              title               = { 'Marvel Heroes' }
+              backTitle           = { null }
+              renderRightButton   = { () => this.addHeroeButton() }
+              renderLeftButton    = { () => this.optionsButton() }
             />
             <Scene
-              key='CharacterDetail'
-              component={ CharacterDetail }
-              navigationBarStyle={ styles.navBar }
-              navBarButtonColor={ 'white' }
+              key                 = 'CharacterDetail'
+              component           = { CharacterDetail }
+              navigationBarStyle  = { styles.navBar }
+              navBarButtonColor   = { 'white' }
+            />
+            <Scene
+              key                 = 'CharacterNew'
+              component           = { CharacterNew }
+              navigationBarStyle  = { styles.navBar }
+              navBarButtonColor   = { 'white' }
+            />
+            <Scene
+              key                 = 'CharacterOptions'
+              component           = { CharacterOptions }
+              navigationBarStyle  = { styles.navBar }
+              navBarButtonColor   = { 'white' }
             />
           </Scene>
         </Router>
@@ -68,5 +108,25 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   navBar: {
     backgroundColor: Colors.navBar
+  },
+  addButtonText: {
+    color: 'white',
+    fontSize: 28,
+    fontWeight: 'bold'
+  },
+  addButton: {
+      padding: 10,
+      alignItems: 'center',
+      justifyContent: 'center'
+  },
+  optionsButton: {
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  optionsButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   }
 })

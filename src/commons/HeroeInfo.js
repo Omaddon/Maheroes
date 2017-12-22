@@ -13,8 +13,9 @@ export function getHeroeImage(heroe) {
 
 export function getHeroeComics(heroe) {
     var comicsNames = []
+    const available = heroe.comics.available ? heroe.comics.available : 0
 
-    if (heroe.comics.available > 0) {
+    if (available > 0) {
         const comics = heroe.comics.items
 
         for (i = 0; i < comics.length; i++) {

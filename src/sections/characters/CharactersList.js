@@ -23,8 +23,8 @@ class CharactersList extends Component {
     renderItem(item, index) {
         return (
             <CharacterCell 
-                item={ item } 
-                onSelect={ (character) => { this.onSelect(character) } }
+                item        = { item } 
+                onSelect    = { (character) => { this.onSelect(character) } }
             />
         )
     }
@@ -33,10 +33,10 @@ class CharactersList extends Component {
         return (
             <View style={ styles.container }>
                 <FlatList
-                    data={ this.props.list }
-                    renderItem={ ({item, index}) => this.renderItem(item, index) }
-                    keyExtractor={ (item, index) => index }
-                    extraData={ this.props }
+                    data            = { this.props.list }
+                    renderItem      = { ({item, index}) => this.renderItem(item, index) }
+                    keyExtractor    = { (item, index) => index }
+                    extraData       = { this.props }
                 />
             </View>
         )
