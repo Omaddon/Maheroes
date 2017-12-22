@@ -47,3 +47,4 @@ export function updateCharacterSelected(character) {
         character
     }
 }
+

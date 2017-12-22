@@ -24,3 +24,18 @@ export function getHeroeComics(heroe) {
 
     return comicsNames
 }
+
+export function getUrl(heroe, urlType) {
+    const urls = heroe.urls ? heroe.urls : null
+
+    if (urls) {
+        for (i = 0; i < urls.length; i++) {
+            // Looking for the key type in the urls array
+            if (urls[i].type == urlType) {
+                return urls[i].url
+            }
+        }
+    }
+
+    return null
+}
