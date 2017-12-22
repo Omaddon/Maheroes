@@ -5,13 +5,15 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import { Scene, Router } from 'react-native-router-flux'
 
 import * as webservices from 'maheroes/src/webservices/webservices'
+import { Colors } from 'maheroes/src/commons'
 
 /********************* COMPONENTS **********************/
 import CharactersList from 'maheroes/src/sections/characters/CharactersList'
+import CharacterDetail from 'maheroes/src/sections/characters/CharacterDetail'
 /*******************************************************/
 
 /************************ REDUX ************************/
@@ -31,6 +33,7 @@ export default class App extends Component {
 
   componentWillMount() {
     webservices.configureAxios()
+    StatusBar.setBarStyle('light-content')
   }
 
   render() {
@@ -44,6 +47,16 @@ export default class App extends Component {
             <Scene
               key='CharacterList'
               component={ CharactersList }
+              navigationBarStyle={ styles.navBar }
+              navBarButtonColor={ 'white' }
+              title={ 'Marvel Heroes' }
+              backTitle= { null }
+            />
+            <Scene
+              key='CharacterDetail'
+              component={ CharacterDetail }
+              navigationBarStyle={ styles.navBar }
+              navBarButtonColor={ 'white' }
             />
           </Scene>
         </Router>
@@ -53,10 +66,7 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  navBar: {
+    backgroundColor: Colors.navBar
   }
 })

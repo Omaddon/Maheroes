@@ -26,6 +26,7 @@ export function fetchCharactersList() {
         fetch(url)
             .then( (response) => {
                 console.log('RESPONSE: ', response)
+                console.log('Heroe: ', response.data.results[1])
                 dispatch(setCharactersFetching(false))
 
                 const list = response.data.results

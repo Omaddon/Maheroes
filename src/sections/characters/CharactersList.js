@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, View, StyleSheet, Text } from 'react-native'
+import { FlatList, View, StyleSheet, Text, ActionSheetIOS } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { Colors } from 'maheroes/src/commons'
 
@@ -58,8 +58,7 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         updateCharacterSelected: (character) => {
             dispatch(CharactersAction.updateCharacterSelected(character))
-            console.log('NAVEGAMOS AL DETALLE... ', character)
-            //Actions."nuevo comoponente"({ title: ... })
+            Actions.CharacterDetail({ title: character.name })
         }
     }
 }
