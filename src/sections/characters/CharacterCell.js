@@ -6,7 +6,7 @@ export default class CharacterCell extends Component {
 
     static defaultProps = {
         item: {},
-        onSelect: () => {}
+        onSelect: () => {},
     }
 
     render() {

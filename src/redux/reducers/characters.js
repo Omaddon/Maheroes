@@ -3,7 +3,7 @@ import * as types from '../types/characters'
 const initialState = {
     list: [],
     isFecthing: false,
-    selected: null
+    selected: null,
 }
 
 export default function reducer(state = initialState, action = {}) {

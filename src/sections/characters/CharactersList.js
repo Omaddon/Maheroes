@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, View, StyleSheet, Text, ActionSheetIOS } from 'react-native'
+import { FlatList, View, StyleSheet, Text, ActivityIndicator } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { Colors } from 'maheroes/src/commons'
 
@@ -29,14 +29,32 @@ class CharactersList extends Component {
         )
     }
 
+    renderHeader() {
+        return (
+            <View>
+                { console.log('renderHeader: ', this.props.isFetching) }
+                { this.props.isFetching ? 
+                    <ActivityIndicator 
+                        size='large' 
+                        color='grey' 
+                        animating={ true }
+                        style={{ marginVertical: 20 }}
+                    />
+                    : null
+                }
+            </View>
+        )
+    }
+
     render() {
         return (
             <View style={ styles.container }>
                 <FlatList
-                    data            = { this.props.list }
-                    renderItem      = { ({item, index}) => this.renderItem(item, index) }
-                    keyExtractor    = { (item, index) => index }
-                    extraData       = { this.props }
+                    data                = { this.props.list }
+                    renderItem          = { ({item, index}) => this.renderItem(item, index) }
+                    ListHeaderComponent = { () => this.renderHeader() }
+                    keyExtractor        = { (item, index) => index }
+                    extraData           = { this.props }
                 />
             </View>
         )

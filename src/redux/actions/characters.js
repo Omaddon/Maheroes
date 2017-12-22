@@ -27,12 +27,12 @@ export function fetchCharactersList() {
             .then( (response) => {
                 console.log('RESPONSE: ', response)
                 console.log('Heroe: ', response.data.results[1])
-                dispatch(setCharactersFetching(false))
 
                 const list = response.data.results
                 const count = response.data.count
                 const offset = response.data.offset
                 dispatch(updateCharactersList(list))
+                dispatch(setCharactersFetching(false))
             })
             .catch( (error) => {
                 console.log('💩 FETCH_ERROR: ', error)
