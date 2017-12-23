@@ -21,6 +21,10 @@ class CharactersList extends Component {
         this.onEndReached = this.onEndReached.bind(this)
     }
 
+    static defaultProps = {
+        onLoad: true
+    }
+
     componentWillMount() {
         this.props.initCharactersList()
     }
@@ -48,8 +52,8 @@ class CharactersList extends Component {
     refreshControl() {
         return (
             <RefreshControl
-                colors      = { ['white'] }
-                tintColor   = { 'white' }
+                colors      = { ['rgba(0, 0, 0, 0)'] }
+                tintColor   = { 'rgba(0, 0, 0, 0)' }
                 onRefresh   = { () => this.props.initCharactersList() }
                 refreshing  = { this.props.isFetching }
             />
@@ -64,6 +68,15 @@ class CharactersList extends Component {
 
         return (
             <View style={ styles.container }>
+                <View style={ styles.spinnerContainer }>
+                    <Spinner
+                        isVisible   = { this.props.isFetching }
+                        color       = { 'white' }
+                        type        = { 'ThreeBounce' }
+                        style       = { styles.spinner }
+                        size        = { 42 }
+                    />
+                </View>
                 <ListView
                     dataSource          = { dataSource }
                     renderRow           = { this.renderRow }
@@ -108,5 +121,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.background
+    },
+    spinnerContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    spinner: {
+        margin: 20
     }
 })
