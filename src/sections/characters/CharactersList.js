@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, View, StyleSheet, Text, ActivityIndicator } from 'react-native'
+import { ListView, View, StyleSheet, RefreshControl } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { Colors } from 'maheroes/src/commons'
 
@@ -12,32 +12,64 @@ import * as CharactersAction from 'maheroes/src/redux/actions/characters'
 
 class CharactersList extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.renderRow = this.renderRow.bind(this)
+        this.onEndReached = this.onEndReached.bind(this)
+    }
+
     componentWillMount() {
-        this.props.fetchCharactersList()
+        this.props.initCharactersList()
     }
 
     onSelect(character) {
         this.props.updateCharacterSelected(character)
     }
 
-    renderItem(item, index) {
+    renderRow(rowData) {
         return (
             <CharacterCell 
-                item        = { item } 
+                item        = { rowData } 
                 onSelect    = { (character) => { this.onSelect(character) } }
             />
         )
     }
 
+    onEndReached() {
+        console.log(this.props.isFetching)
+        if (this.props.list.length < this.props.total && !this.props.isFetching) {
+            let newOffset = this.props.offset + 10
+            this.props.fetchCharactersList(newOffset)
+        }
+    }
+
     render() {
+
+        const list = this.props.list
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+        const dataSource = ds.cloneWithRows(list)
+
         return (
             <View style={ styles.container }>
-                <FlatList
-                    data                = { this.props.list }
-                    renderItem          = { ({item, index}) => this.renderItem(item, index) }
-                    keyExtractor        = { (item, index) => index }
-                    extraData           = { this.props }
+                <ListView
+                    dataSource          = { dataSource }
+                    renderRow           = { this.renderRow }
+                    onEndReached        = { this.onEndReached }
+                    enableEmptySections = { true }
                 />
+                { /* refreshControl: isFetching 'undefined'!!!! */ } 
+                {/*
+                    refreshControl      = {
+                                            <RefreshControl
+                                                refreshing  = { this.props.isFetching }
+                                                onRefresh   = { () => this.props.initCharactersList() }
+                                                colors      = { ['white'] }
+                                                tintColor   = { 'white' }
+                                            />
+                                        }
+
+                */}
             </View>
         )
     }
@@ -46,14 +78,20 @@ class CharactersList extends Component {
 const mapStateToProps = (state) => {
     return {
         list:       state.characters.list,
-        isFetching: state.characters.isFetching,
-        selected:   state.characters.selected
+        selected:   state.characters.selected,
+        total:      state.characters.total,
+        offset:     state.characters.offset,
+        isFetching: state.characters.isFetching
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchCharactersList: () => {
+        initCharactersList: () => {
+            dispatch(CharactersAction.initCharactersList())
+        },
+        fetchCharactersList: (offset) => {
+            dispatch(CharactersAction.updateCharactersListOffset(offset))
             dispatch(CharactersAction.fetchCharactersList())
         },
         updateCharacterSelected: (character) => {
@@ -69,10 +107,5 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.background
-    },
-    footer: {
-        paddingVertical: 20,
-        borderTopWidth: 1,
-        borderColor: "#CED0CE"
-      }
+    }
 })

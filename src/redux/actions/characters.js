@@ -1,11 +1,13 @@
 import * as types from '../types/characters'
-import { PUBLIC_API_KEY } from 'maheroes/src/webservices/constants'
+import { PUBLIC_API_KEY, LIMIT } from 'maheroes/src/webservices/constants'
 import { fetch } from 'maheroes/src/webservices/webservices'
+import qs from 'qs'
 
-function updateCharactersList(list) {
+function updateCharactersList(list, total) {
     return {
         type: types.CHARACTER_UPDATE_LIST,
-        list
+        list,
+        total
     }
 }
 
@@ -16,23 +18,50 @@ function setCharactersFetching(value) {
     }
 }
 
+export function updateCharactersListOffset(offset) {
+    return {
+        type: types.CHARACTER_UPDATE_LIST_OFFSET,
+        offset
+    }
+}
+
+export function initCharactersList() {
+    return (dispatch, getState) => {
+        // Empty list
+        dispatch(updateCharactersList([], 0))
+        // Set offset to 0
+        dispatch(updateCharactersListOffset(0))
+        // Fetch list
+        dispatch(fetchCharactersList())
+
+    }
+}
+
 export function fetchCharactersList() {
 
     return (dispatch, getState) => {
 
         dispatch(setCharactersFetching(true))
 
-        const url = '/characters?apikey=' + PUBLIC_API_KEY
+        const state = getState()
+        const list = state.characters.list
+        const offset = state.characters.offset
+        const limit = LIMIT
+
+        const filters = {
+            offset: offset,
+            limit: limit,
+            apikey: PUBLIC_API_KEY
+        }
+
+        const url = 'characters?' + qs.stringify(filters)
         fetch(url)
             .then( (response) => {
-                console.log('RESPONSE: ', response)
-                console.log('Heroe: ', response.data.results[1])
-
-                const list = response.data.results
-                const count = response.data.count
-                const offset = response.data.offset
-                dispatch(updateCharactersList(list))
                 dispatch(setCharactersFetching(false))
+
+                const newList = [...list, ...response.data.results]
+                const total = response.data.total
+                dispatch(updateCharactersList(newList, total))
             })
             .catch( (error) => {
                 console.log('💩 FETCH_ERROR: ', error)

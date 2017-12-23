@@ -1,9 +1,11 @@
 import * as types from '../types/characters'
 
 const initialState = {
-    list: [],
+    list:          [],
+    total:          0,
+    offset:         0,
     isFecthing: false,
-    selected: null,
+    selected:    null,
 }
 
 export default function reducer(state = initialState, action = {}) {
@@ -11,12 +13,18 @@ export default function reducer(state = initialState, action = {}) {
         case types.CHARACTER_UPDATE_LIST:
             return {
                 ...state,
-                list: action.list
+                list: action.list,
+                total: action.total
             }
         case types.CHARACTER_SET_FETCHING:
             return {
                 ...state,
                 isFecthing: action.value
+            }
+        case types.CHARACTER_UPDATE_LIST_OFFSET:
+            return {
+                ...state,
+                offset: action.offset
             }
         case types.CHARACTER_UPDATE_CHARACTER:
             return {
