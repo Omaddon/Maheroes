@@ -4,7 +4,7 @@ const initialState = {
     list:          [],
     total:          0,
     offset:         0,
-    isFecthing: false,
+    isFetching: false,
     selected:    null,
 }
 

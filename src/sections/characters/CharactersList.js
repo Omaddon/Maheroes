@@ -37,7 +37,6 @@ class CharactersList extends Component {
     }
 
     onEndReached() {
-        console.log(this.props.isFetching)
         if (this.props.list.length < this.props.total && !this.props.isFetching) {
             let newOffset = this.props.offset + 10
             this.props.fetchCharactersList(newOffset)
@@ -57,19 +56,16 @@ class CharactersList extends Component {
                     renderRow           = { this.renderRow }
                     onEndReached        = { this.onEndReached }
                     enableEmptySections = { true }
-                />
-                { /* refreshControl: isFetching 'undefined'!!!! */ } 
-                {/*
                     refreshControl      = {
                                             <RefreshControl
-                                                refreshing  = { this.props.isFetching }
-                                                onRefresh   = { () => this.props.initCharactersList() }
                                                 colors      = { ['white'] }
                                                 tintColor   = { 'white' }
+                                                onRefresh   = { () => this.props.initCharactersList() }
+                                                refreshing  = { this.props.isFetching ? 
+                                                    this.props.isFetching : false  }
                                             />
                                         }
-
-                */}
+                />
             </View>
         )
     }
@@ -81,7 +77,7 @@ const mapStateToProps = (state) => {
         selected:   state.characters.selected,
         total:      state.characters.total,
         offset:     state.characters.offset,
-        isFetching: state.characters.isFetching
+        isFetching: state.characters.isFecthing
     }
 }
 
