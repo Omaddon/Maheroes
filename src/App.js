@@ -15,7 +15,6 @@ import { Colors } from 'maheroes/src/commons'
 import CharactersList from 'maheroes/src/sections/characters/CharactersList'
 import CharacterDetail from 'maheroes/src/sections/characters/CharacterDetail'
 import CharacterNew from 'maheroes/src/sections/characters/CharacterNew'
-import CharacterOptions from 'maheroes/src/sections/characters/CharacterOptions'
 /*******************************************************/
 
 /************************ REDUX ************************/
@@ -50,18 +49,6 @@ export default class App extends Component {
     )
   }
 
-  optionsButton() {
-    return (
-      <TouchableOpacity 
-        onPress = { () => Actions.CharacterOptions({ title: 'Options' }) } 
-        style   = { styles.optionsButton }>
-
-        <Text style={ styles.optionsButtonText }>{ 'Options' }</Text>
-
-    </TouchableOpacity>
-    )
-  }
-
   render() {
 
     console.disableYellowBox = true
@@ -78,7 +65,6 @@ export default class App extends Component {
               title               = { 'Marvel Heroes' }
               backTitle           = { null }
               renderRightButton   = { () => this.addHeroeButton() }
-              renderLeftButton    = { () => this.optionsButton() }
             />
             <Scene
               key                 = 'CharacterDetail'
@@ -89,12 +75,6 @@ export default class App extends Component {
             <Scene
               key                 = 'CharacterNew'
               component           = { CharacterNew }
-              navigationBarStyle  = { styles.navBar }
-              navBarButtonColor   = { 'white' }
-            />
-            <Scene
-              key                 = 'CharacterOptions'
-              component           = { CharacterOptions }
               navigationBarStyle  = { styles.navBar }
               navBarButtonColor   = { 'white' }
             />

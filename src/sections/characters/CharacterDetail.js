@@ -27,21 +27,25 @@ class CharacterDetail extends Component {
         
         return(
             <ScrollView style={ styles.container }>
+                { /******************** IMAGE PICKER ********************/}
                 <Image 
                     source={ HeroeInfo.getHeroeImage(item) } 
                     resizeMode={ 'cover' } 
                     style={ styles.image }
                 />
+                { /***************** NAME & DESCRIPTION *****************/}
                 <View style={ styles.textContainer }>
                     <Text style={ styles.name }>{ name }</Text>
                     <Text style={ styles.description }>{ description }</Text>
                 </View>
+                { /******************** COMICS LIST *********************/}
                 <View style={ styles.textContainer }>
                     <Text style={ styles.comicsTitle }>
                         { item.comics.available > 0 ? 'Comics:' : null }
                     </Text>
                     <Text style={ styles.comics}>{ HeroeInfo.getHeroeComics(item) }</Text>
                 </View>
+                { /**************** BUTTONS wiki & detail ***************/}
                 <View style={ styles.buttonContainer }>
                     { wiki ?
                         <Button

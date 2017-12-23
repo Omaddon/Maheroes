@@ -21,10 +21,6 @@ class CharactersList extends Component {
         this.onEndReached = this.onEndReached.bind(this)
     }
 
-    static defaultProps = {
-        onLoad: true
-    }
-
     componentWillMount() {
         this.props.initCharactersList()
     }
