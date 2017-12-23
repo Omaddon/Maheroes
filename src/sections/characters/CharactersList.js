@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { ListView, View, StyleSheet, RefreshControl } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { LIMIT } from 'maheroes/src/webservices/constants'
 import { Colors } from 'maheroes/src/commons'
+import Spinner from 'react-native-spinkit'
 
 import CharacterCell from './CharacterCell'
 
@@ -38,9 +40,20 @@ class CharactersList extends Component {
 
     onEndReached() {
         if (this.props.list.length < this.props.total && !this.props.isFetching) {
-            let newOffset = this.props.offset + 10
+            let newOffset = this.props.offset + LIMIT
             this.props.fetchCharactersList(newOffset)
         }
+    }
+
+    refreshControl() {
+        return (
+            <RefreshControl
+                colors      = { ['white'] }
+                tintColor   = { 'white' }
+                onRefresh   = { () => this.props.initCharactersList() }
+                refreshing  = { this.props.isFetching }
+            />
+        )
     }
 
     render() {
@@ -56,15 +69,7 @@ class CharactersList extends Component {
                     renderRow           = { this.renderRow }
                     onEndReached        = { this.onEndReached }
                     enableEmptySections = { true }
-                    refreshControl      = {
-                                            <RefreshControl
-                                                colors      = { ['white'] }
-                                                tintColor   = { 'white' }
-                                                onRefresh   = { () => this.props.initCharactersList() }
-                                                refreshing  = { this.props.isFetching ? 
-                                                    this.props.isFetching : false  }
-                                            />
-                                        }
+                    refreshControl      = { this.refreshControl() }
                 />
             </View>
         )
@@ -77,7 +82,7 @@ const mapStateToProps = (state) => {
         selected:   state.characters.selected,
         total:      state.characters.total,
         offset:     state.characters.offset,
-        isFetching: state.characters.isFecthing
+        isFetching: state.characters.isFetching
     }
 }
 

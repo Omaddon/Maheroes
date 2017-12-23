@@ -19,7 +19,7 @@ export default function reducer(state = initialState, action = {}) {
         case types.CHARACTER_SET_FETCHING:
             return {
                 ...state,
-                isFecthing: action.value
+                isFetching: action.value
             }
         case types.CHARACTER_UPDATE_LIST_OFFSET:
             return {
