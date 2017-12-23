@@ -6,7 +6,7 @@ Marvel application that shows a list of the characters and the comics in which e
 - [Install](https://github.com/Omaddon/Maheroes#install)
 - [Usage](https://github.com/Omaddon/Maheroes#usage)
 - [Technologies](https://github.com/Omaddon/Maheroes#technologies)
-- [Architecture](https://github.com/Omaddon/Maheroes#architecture)
+- [Architecture](#architecture)
 
 CharList | CharDetail | AddChar | Browser
 ----- | ----- | ----- | ----- 
