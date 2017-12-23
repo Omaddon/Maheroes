@@ -11,9 +11,11 @@
     "qs": "^6.5.1",
     "react": "16.0.0",
     "react-native": "0.51.0",
+    "react-native-elements": "^0.18.5",
     "react-native-image-picker": "^0.26.7",
     "react-native-router-flux": "^4.0.0-beta.24",
     "react-native-spinkit": "^1.1.1",
+    "react-native-vector-icons": "^4.4.3",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
