@@ -2,10 +2,9 @@
 Marvel application that shows a list of the characters and the comics in which each character appears. Use marvel api: [Marvel APi](https://developer.marvel.com/docs#!/public/getCharacterIndividual_get_1).
 
 ## Table of contents
-- [Requirements](https://github.com/Omaddon/Maheroes#requirements)
-- [Install](https://github.com/Omaddon/Maheroes#install)
-- [Usage](https://github.com/Omaddon/Maheroes#usage)
-- [Technologies](https://github.com/Omaddon/Maheroes#technologies)
+- [Requirements](#requirements)
+- [Install](#install)
+- [Technologies](#technologies)
 - [Architecture](#architecture)
 
 CharList | CharDetail | AddChar | Browser
@@ -28,11 +27,23 @@ The app use iOS 11.1 and Android 8.1.
 - In other tab but in the same directory, type: `react-native run-ios` or `react-native run-android` to launch device simulator.
 - That's all!
 
-## Usage
-
 ## Technologies
+***Maheroes*** use the following modules:
+- [*Axios*](https://github.com/axios/axios)
+- [*qs*](https://github.com/ljharb/qs)
+- [*react-native-elements*](https://github.com/react-native-training/react-native-elements)
+- [*react-native-image-picker*](https://github.com/react-community/react-native-image-picker/blob/develop/README.md)
+- [*react-native-router-flux*](https://github.com/aksonov/react-native-router-flux)
+- [*react-native-spinkit*](https://github.com/maxs15/react-native-spinkit)
+- [*react-native-vector-icons*](https://github.com/oblador/react-native-vector-icons)
+- [*react-redux*](https://github.com/reactjs/react-redux)
+- [*redux*](https://github.com/reactjs/redux)
+- [*redux-thunk*](https://github.com/gaearon/redux-thunk)
 
 ## Architecture
+***Maheroes*** uses a Flux architecture using redux. Only one reducer is needed to manage the entire app. Also the app use their own widgets as buttons or inputs boxes.
+
+## IMPORTANT! *Create new char* is mocked because the API used don't support POST requests.
 
 ---
-###### © Miguel J.
+###### *© 2017 Miguel Jardón.*
