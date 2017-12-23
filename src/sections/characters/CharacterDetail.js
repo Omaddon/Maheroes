@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(CharacterDetail)
+export default connect(mapStateToProps, null)(CharacterDetail)
 
 const styles = StyleSheet.create({
     container: {

@@ -29,30 +29,12 @@ class CharactersList extends Component {
         )
     }
 
-    renderHeader() {
-        console.log(this.props.isFetching)
-        return (
-            <View>
-                { this.props.isFetching ? 
-                    <ActivityIndicator 
-                        size='large' 
-                        color='grey' 
-                        animating={ true }
-                        style={{ marginVertical: 20 }}
-                    />
-                    : null
-                }
-            </View>
-        )
-    }
-
     render() {
         return (
             <View style={ styles.container }>
                 <FlatList
                     data                = { this.props.list }
                     renderItem          = { ({item, index}) => this.renderItem(item, index) }
-                    ListHeaderComponent = { () => this.renderHeader() }
                     keyExtractor        = { (item, index) => index }
                     extraData           = { this.props }
                 />
@@ -87,5 +69,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.background
-    }
+    },
+    footer: {
+        paddingVertical: 20,
+        borderTopWidth: 1,
+        borderColor: "#CED0CE"
+      }
 })
