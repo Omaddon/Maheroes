@@ -1,5 +1,5 @@
 # MAHEROES
-Marvel application that shows a list of the characters and the comics in which each character appears. Use marvel api: [Marvel APi](https://developer.marvel.com/docs#!/public/getCharacterIndividual_get_1).
+Marvel application that shows a list of the characters and the comics in which each character appears. Use marvel api: [Marvel APi](https://developer.marvel.com/docs#!/public/getCharacterIndividual_get_1){:target="_blank"}.
 
 ## Table of contents
 - [Requirements](#requirements)
